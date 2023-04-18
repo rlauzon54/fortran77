@@ -1,0 +1,67 @@
+Files:
+RANDSEED.FOR - Used the ELMOP library to get the current date/time and builds up the seed values for the random number generator.
+GENSEED.FOR - Test and common code for using RANDSEED to build seeds for the random number generator
+RANDOM.DOC - Original documentation for the RANDOM functions
+RANDOM.FOR - Initialize random number generator, generate a random number 0 =< 1, generate a random int between a min and max value
+RANDOM.INC - Common include for holding pseudorandom number generator state
+RANDTEST.FOR - Test and example code for calling the random number generator
+
+Build instructions using Microsoft FORTRAN 3.2
+Build: RANDOM.OBJ
+for1 random.for
+- Object filename: random.obj
+- Source listing: nul.lst
+- Object listing: nul.cod
+
+pas2
+
+Build: RANDSEED.OBJ
+for1 RANDSEED.for
+- Object filename: RANDSEED.obj
+- Source listing: nul.lst
+- Object listing: nul.cod
+
+pas2
+
+Build: RANDTEST.EXE
+for1 randtest.for
+- Object filename: randtest.obj
+- Source listing: nul.lst
+- Object listing: nul.cod
+
+pas2
+
+link randtest.obj random.obj
+- Run file: randtest.exe
+- List file: nul.map
+- Libraries: .lib
+
+Build: GENSEED.EXE
+for1 genseed.for
+- Object filename: genseed.obj
+- Source listing: nul.lst
+- Object listing: nul.cod
+
+pas2
+
+link genseed.obj random.obj
+- Run file: randtest.exe
+- List file: nul.map
+- Libraries: elmop.lib
+
+
+Notes:
+You need to define the 'randint' function as an INTEGER.  Since it starts with "R" it will default to a REAL.
+      INTEGER randint
+	  
+And remember to include the INC file.  The COMMON area is used by the random number library to remember the state of the psedorandom state.
+$include:'RANDOM.INC'
+
+The seed values:
+      IJ = 1802
+      KL = 9373
+Should change every run somehow.  
+0 <= IJ <= 31328
+0 <= KL <= 30081
+
+IHMO: Use the ELMOP library to get the current time as numbers and use that to seed the random number generator.

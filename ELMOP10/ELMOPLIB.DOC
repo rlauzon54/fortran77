@@ -1,0 +1,2909 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+             ษอออออออออออออออออออออออออออออออออออออออออออออออออออออป
+             บ                                                     บ
+             บ                                                     บ
+             บ                  E L M O P   L I B                  บ
+             บ                                                     บ
+             บ          ( Pronounced  L - MO - P   LYE-B )         บ
+             บ                                                     บ
+             บ                                                     บ
+             บ                                                     บ
+             บ    A set of MicroSoft FORTRAN compatible routines   บ
+             บ                                                     บ
+             บ                                                     บ
+             บ                                                     บ
+             บ                  Michael A. Gerhard                 บ
+             บ                                                     บ
+             บ                                                     บ
+             บ                                                     บ
+             บ                    March 15, 1993                   บ
+             บ                                                     บ
+             บ                                                     บ
+             ศอออออออออออออออออออออออออออออออออออออออออออออออออออออผ
+
+
+
+
+
+
+                                 About Shareware
+                                 ---------------
+
+             The ELMOP.LIB software is sold as shareware via user groups,
+        "Public Domain Software Entities", and directly from me. This
+        does not mean the software is free, it is not.
+
+             The software is distributed with a nominal charge (to cover
+        the cost of making a disk and shipping it), so you may try the
+        software out first, and be assured it works with your system, and
+        that you wish to use it. Once you are satisfied it's adequate and
+        meets your needs, I the developer expect you to register with me
+        and pay the registration fee.
+
+             The entire shareware concept relies on the faith of software
+        developers, and the honesty of users. If you abuse the privilege
+        of shareware software, you  risk not having any shareware, so
+        make your choices carefully regarding your need to register for
+        this or any other shareware product.
+
+             The ELMOP.LIB shareware package may be freely distributed by
+        anyone, so long as not more than $5 is charged for duplicating
+        the disk and/or manual (the manual is on the disk). I encourage
+        you to make copies and give them to friends, your user group, or
+        anyone else. Make sure you give them an unaltered version, with
+        the manual on the disk.
+
+             The assembly source code for ELMOP.LIB functions is avail-
+        able.  They are copyrighted and are not to be distributed.
+
+             Registered users of ELMOP.LIB will be notified of specific
+        errors, corrections and updates by mail. There is also limited
+        telephone support for registered users.
+
+        Shareware Disk                $  7.00    Manual on disk
+        Registration & Disk           $ 20.00    Manual on disk
+        If you bought your share disk from me, I'll register you for $13.
+        Assembly source (ELMOP.lib)   $ 15.00    Requires A86 assembler.
+        Printed Manual                $ 15.00
+
+        NOTE: Please state disk size  (5.25" or 3.5")
+              If no size is stated I will ship 5.25" disk.
+
+        For Info call (510) 372-0365 (evenings or Friday-Sunday all day)
+        To order, send check or mony order, and state items desired, to:
+             Michael Gerhard
+             2224 Forsythia Way
+             Martinez, CA  94553
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+                                TABLE OF CONTENTS
+                                _________________
+
+
+
+             INTRODUCTION and RESTRICTIONS........................  1
+
+
+             DOS FUNCTIONS........................................  2
+
+                System TIME and DATE utilities....................  2
+                   CTIME    (Return system time)..................  2
+                   ITIME    (Return system time)..................  3
+                   SETTIM   (Set the system time).................  3
+                   CDATE    (Return system date)..................  3
+                   IDATE    (Return system date)..................  3
+                   SETDAT   (Set the system date).................  4
+
+                Directory list utilities..........................  4
+                   DDIR     (Return file list)....................  4
+                   SDDIR    (Return sorted file list).............  4
+                   SBDIR    (Return subdirectory list)............  4
+                   SSBDIR   (Return sorted subdirectory list).....  4
+
+                Disk file utilities...............................  5
+                   DSDEL    (Delete a file).......................  6
+                   DSREN    (Rename a file).......................  6
+                   FILDNT   (Return file date and time)...........  7
+                   SETDNT   (Set file date and time)..............  7
+                   FLINFO   (Return file information).............  8
+                   IFLSIZ   (Return size of a file)...............  8
+                   IRECLN   (Return file record length)...........  9
+                   LEXIST   (Return existence of a file)..........  9
+                   PTHFND   (Find file using the DOS path)........ 10
+                   IOLDST   (Compare two file times/dates)........ 10
+                   SETARC   (Set or clear archive flag)........... 11
+                   GATRIB   (Return file attributes).............. 11
+
+                Disk drive utilities.............................. 12
+                   IGTDRV   (Return default drive)................ 12
+                   SETDRV   (Change default drive)................ 13
+                   IDSKSP   (Return space on a disk).............. 13
+                   IDSKSZ   (Return size of a disk)............... 13
+                   IDSTAT   (Check status of floppy drive)........ 14
+                   NMHDRV   (Return number of harddisk drives).... 14
+                   VOLUME   (Return disk volume label)............ 14
+
+                Subdirectory utilities............................ 15
+                   MKDIR    (Create subdirectory)................. 15
+                   CHDIR    (Change current subdirectory)......... 16
+                   RENDIR   (Rename a subdirectory)............... 16
+                   RMDIR    (Remove subdirectory)................. 17
+                   CURDIR   (Return current subdirectory)......... 17
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+             DOS FUNCTIONS  (continued)
+
+                Write verify utilities............................ 18
+                   IGTVER   (Return write verify flag)............ 18
+                   VERON    (Set write verify flag on)............ 18
+                   VEROFF   (Set write verify flag off)........... 18
+
+                Command line...................................... 19
+                   CMDLIN   (Return program command line)......... 19
+
+
+                Miscellaneous DOS functions....................... 19
+                   DOSVER   (Return DOS version number)........... 19
+                   MEMFRE   (Return amount of free memory)........ 19
+
+
+                Environment utilities............................. 20
+                   CHKENV   (Return SET value from environment)... 20
+                   PROGNM   (Return program name)................. 21
+                   RDENV    (Return complete environment table)... 21
+
+
+             DISPLAY FUNCTIONS.................................... 22
+
+                   DISPC    (Display a character)................. 22
+                   DISPMC   (Display 'N' characters).............. 22
+                   DISPST   (Display string of characters)........ 23
+
+
+             PRINTER FUNCTIONS.................................... 24
+
+                   IPSTAT   (Return status of Printer Port)....... 24
+                   PRNTC    (Print a single character)............ 25
+                   PRNTMC   (Print 'N' characters)................ 25
+                   PRNTST   (Print string of characters).......... 26
+
+
+             COMPORT FUNCTIONS.................................... 27
+
+                   INTCOM   (Initialize communication port)....... 27
+                   SENDMC   (Send 'N' characters)................. 28
+
+
+             KEYBOARD FUNCTIONS................................... 29
+
+                   GTKEYE   (Wait for a key and echo)............. 30
+                   GTKEYS   (Wait for a key and do not echo)...... 30
+                   IGTKYE   (Get a key, echo and do not wait)..... 30
+                   IGTKEY   (Get a key, do not echo or wait)...... 30
+                   KBFLSH   (Flush keyboard buffer)............... 31
+                   KBUFIN   (Read the keyboard buffer)............ 31
+                   KEYRDY   (Check for key ready)................. 31
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+             VIDEO FUNCTIONS...................................... 32
+
+                Cursor utilities.................................. 32
+                   CUROFF   (Set cursor off)...................... 32
+                   CURSOR   (Set cursor size)..................... 32
+                   GETCUR   (Return cursor location and size)..... 33
+                   POSCUR   (Position cursor)..................... 33
+
+                Video mode and clear screen utilities............. 34
+                   CLS      (Clear screen)........................ 34
+                   IGTAPG   (Return active page).................. 35
+                   IGTMOD   (Return video mode)................... 35
+                   PGSWAP   (Swap pages 0 and 1).................. 35
+                   PSCRN    (Print screen)........................ 35
+                   SCRLDN   (Scroll window down).................. 36
+                   SCRLUP   (Scroll window up).................... 36
+                   SETAPG   (Set active page)..................... 36
+                   SETMOD   (Set video mode)...................... 36
+
+                Screen write utilities............................ 37
+                   HWRITE   (Write string to 'hidden' page)....... 38
+                   HWRITN   (Write n chars to 'hidden' page)...... 39
+                   SWRITE   (Write string to any page)............ 39
+                   SWRITN   (Write n chars to any page)........... 40
+                   WRTSTR   (Write string to active page)......... 40
+                   WRTSTN   (Write n chars to active page)........ 41
+                   PUTBLK   (Put block of characters)............. 41
+
+                Screen read utilities............................. 42
+                   GETBLK   (Get block of characters)............. 42
+                   GETCHR   (Get character from screen)........... 43
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+                                  INTRODUCTION
+                                  ____________
+
+             These Fortran callable routines are compatible with Micro-
+        Soft FORTRAN versions 3.xx, 4.xx, and 5.xx.  They provide a
+        number of DOS functions that are not directly available in FOR-
+        TRAN.  Some of the features of these routines are listed below.
+             Set and return system time and date
+             Return directory lists of files and subdirectories
+             Create, remove, or change subdirectories
+             Return disk size and free space, current disk
+             Check floppy disk drive status
+             Return the program command line
+             Return program name, environment information
+             Send characters to the standard output device
+             Send characters to the standard printer device
+             Capture key stokes
+             Manipulate the cursor appearance and position
+             Clear or scroll all or portions of the screen
+             Display characters on any video page (color)
+             Get and put blocks of characters on the screen
+             Mouse functions (coming soon)
+
+                                  RESTRICTIONS
+                                  ____________
+
+             Most of the numeric arguments are INTEGER*2, but several are
+        INTEGER*4.  Make sure all arguments have the correct type.
+
+             Use the LARGE or HUGE memory models.  ELMOP.LIB assumes that
+        the addresses placed on the stack for all arguments are 32bit
+        (i.e., they include the SEGMENT and NEAR address).  See your MS
+        FORTRAN manual for more information concering memory models.
+
+                                      NOTES
+                                      _____
+
+             All arguments that pass data to ELMOP.LIB routines may be
+        literals.  However, for numeric arguments you must ensure they
+        are the correct type.  An example using literals is shown below.
+
+             CALL WRTSTR ( 10, 20, 15, 'This is a literal string\' )
+
+             ELMOP.LIB supports the Lahey-F77L compiler. You must declare
+        each ELMOP.LIB function using the MSEXTERNAL keyword, and do so
+        in each routine using the ELMOP.LIB functions as shown below.
+
+             Character*12  FILES(mxfils)
+             Character     MASK*n
+             Integer*2     NFILES, MXFILS
+             msexternal    DDIR
+
+             call DDIR   ( MASK, MXFILS, FILES, NFILES )
+
+
+                                          1
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+                                  DOS FUNCTIONS
+                                  _____________
+
+
+        System TIME and DATE Utilities        ______________________________
+
+             These routines allow you to set and return the system TIME
+        and DATE.  TIME and DATE are returned as character strings or as
+        their numeric components.
+
+
+        Summary
+
+             Return system TIME as character string
+
+                call CTIME  ( HMS )
+
+             Return system TIME as numeric components
+
+                call ITIME  ( HR, MIN, SEC, HUND )
+
+             Set system TIME
+
+                call SETTIM ( HR, MIN, SEC, HUND, IER )
+
+             Return system DATE as character string
+
+                call CDATE  ( MDY )
+
+             Return system DATE as numeric components
+
+                call IDATE  ( MONTH, DAY, YEAR, DOW )
+
+             Set system DATE
+
+                call SETDAT ( MONTH, DAY, YEAR, IER )
+
+
+
+        CTIME    (Return system TIME as character string)
+
+             Character   HMS*9
+
+             call CTIME  ( HMS )
+
+                Where ---
+                   HMS    = TIME as character string
+                                                (Form 'HH:MM:SS\')
+
+
+
+
+
+
+
+                                          2
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        ITIME    (Return system TIME as numeric components)
+
+             Integer*2   HR, MIN, SEC, HUND
+
+             call ITIME  ( HR, MIN, SEC, HUND )
+
+                Where ---
+                   HR     = Integer hour        (0 to 23)
+                   MIN    = Integer minutes     (0 to 59)
+                   SEC    = Integer seconds     (0 to 59)
+                   HUND   = Integer hundredths of a second
+                                                (0 to 99)
+
+
+        SETTIM       (Set system TIME)
+
+             Integer*2   HR, MIN, SEC, HUND, IER
+
+             call SETTIM ( HR, MIN, SEC, HUND, IER )
+
+                Where ---
+                   HR    = Integer hour         (0 to 23)
+                   MIN   = Integer minutes      (0 to 59)
+                   SEC   = Integer seconds      (0 to 59)
+                   HUND  = Integer hundredths of a second
+                                                (0 to 99)
+                   IER   = Integer error flag   (0=time set
+                                                 1=ERROR, time not set)
+
+
+        CDATE    (Return system DATE as character string)
+
+             Character   MDY*9
+
+             call CDATE  ( MDY )
+
+                Where ---
+                   MDY   = DATE as a character string in form 'MM/DD/YY\'
+
+
+
+        IDATE    (Return system DATE as numeric components)
+
+             Integer*2   MONTH, DAY, YEAR, DOW
+
+             call IDATE  ( MONTH, DAY, YEAR, DOW )
+
+                Where ---
+                   MONTH = Integer month        (1 to 12
+                                                 1=Jan, 2=Feb, etc.)
+                   DAY   = Integer day          (1 to 31)
+                   YEAR  = Integer year         (1980 to 2099)
+                   DOW   = Integer day of week  (0 to 6
+                                                 0=Sun, 1=Mon, etc.)
+
+                                          3
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        SETDAT       (Set system DATE)
+
+             Integer*2   MONTH, DAY, YEAR, IER
+
+             call SETDAT ( MONTH, DAY, YEAR, IER )
+
+                Where ---
+                   MONTH = Integer month        (1 to 12
+                                                 1=Jan, 2=Feb, etc.)
+                   DAY   = Integer day          (1 to 31)
+                   YEAR  = Integer year         (1980 to 2099)
+                   IER   = Integer error flag   (0=date set
+                                                 1=ERROR, date not set)
+
+
+        DIRECTORY List Utilities        ________________________
+
+             These routines will return a list of files or subdirectories
+        for any drive and any subdirectory.  A file mask may be specified
+        to limit the search.
+
+
+        DDIR       (Return file list)
+        SDDIR      (Return sorted file list)
+        SBDIR      (Return subdirectory list)
+        SSBDIR     (Return sorted subdirectory list)
+
+             Character*12  FILES(mxfils)
+             Character     MASK*n
+             Integer*2     NFILES, MXFILS
+
+             call DDIR   ( MASK, MXFILS, FILES, NFILES )
+             call SDDIR  ( MASK, MXFILS, FILES, NFILES )
+             call SBDIR  ( MASK, MXFILS, FILES, NFILES )
+             call SSBDIR ( MASK, MXFILS, FILES, NFILES )
+
+                Where ---
+                   MASK   = Directory search mask, may include drive,
+                            subdirectory and global wildcards. Must end
+                            with either a null (00h byte) or the
+                            character '|'
+                            Examples: '*.*|'   '*.FOR|'   'A:S??.EX?|'
+                                      'A:FILES.|'  'C:\DIR1\SUBDIR1\*.*|'
+                   MXFILS = Maximum number of names to get
+                       NOTE - Examines the 1st MXFILS in the directory so
+                              it is possible to NOT get the 1st MXFILS
+                              alphabetical files in the sorted list.
+                   FILES  = Array to receive the file name list
+                            Name is immediately followed by the extension
+                            FILES(n) = 'nnnnn.xxx   ' i.e. 'source.for  '
+                            Subdirectory names do not include an
+                            extension or leading '\'
+                       NOTE - FILES must be dimensioned at least MXFILS
+                   NFILES = Number of names actually returned in FILES
+
+                                          4
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        DISK FILE utilities        ___________________
+
+             These routines will delete or rename disk files, check to
+        see if a file exists, return system information about files, com-
+        pare files to determine the oldest, and set file time and date.
+
+        Summary
+             Delete a file
+
+                call DSDEL  ( FILNAM, IER )
+
+             Rename a file
+
+                call DSREN  ( FILNAM, NEWFIL, IER )
+
+             Return file time and date
+
+                call FILDNT ( FILNAM, MONTH,DAY,YEAR, HR,MIN,SEC )
+
+             Set file time and date
+
+                call SETDNT ( FILNAM, MONTH,DAY,YEAR, HR,MIN,SEC, IER )
+
+             Return file information
+
+                call FLINFO ( FILNAM, ISIZ, IATRIB, FDATE, FTIME )
+
+             Return file size
+
+                isiz = IFLSIZ ( FILNAM )
+
+             Return file record length
+
+                leng = IRECLN ( FILNAM )
+
+             Check to see if file exists
+
+                exst = LEXIST ( FILNAM )
+
+             Find file using the DOS path
+
+                call PTHFND ( FILE, PFILE, NCHR )
+
+             Compare date/time of two files
+
+                iold = IOLDST ( FILNAM, FILNM2 )
+
+             Set or clear the archive flag for a file
+
+                call SETARC ( FILNAM, IARCH, IER )
+
+             Return file attributes
+
+                call GATRIB ( FILNAM, IRW, IHID, ISYS, IARCH, IER )
+
+                                          5
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        DSDEL    (Delete a file)
+
+             Character  FILNAM*n
+             Integer*2  IER
+
+             call DSDEL ( FILNAM, IER )
+
+                Where ---
+                   FILNAM = Name of file to delete.
+                            May include drive and subdirectory (no wild-
+                            cards).  Must end with either a null (00h
+                            byte) or the character '|'
+                            Example:  'C:\DIR1\SUBDIR1\JUNK.DAT|'
+                   IER    = Error flag     (0=file deleted
+                                            1=ERROR, file not deleted)
+
+
+
+        DSREN    (Rename a file)
+
+             Character  FILNAM*n, NEWFIL*m
+             Integer*2  IER
+
+             call DSREN ( FILNAM, NEWFIL, IER )
+
+                Where ---
+                   FILNAM = Name of file to rename.
+                            May include drive and subdirectory (no wild-
+                            cards).  Must end with either a null (00h
+                            byte) or the character '|'
+                            Example:  'C:\DIR1\SUBDIR1\JUNK.DAT|'
+                   NEWFIL = FILNAM will be renamed to NEWFIL
+                            Must not include wildcards, drive designation
+                            or subdirectory specification!  Must end with
+                            either a null (00h byte) or the character '|'
+                            Example:  'NEWJNK.OLD|'
+                   IER    = Error flag     (0=file renamed
+                                            1=ERROR, file not renamed)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          6
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        FILDNT       (Return file date and time)
+
+             Character  FILNAM*n
+             Integer*2  MONTH, DAY, YEAR, HR, MIN, SEC )
+
+             call FILDNT ( FILNAM, MONTH, DAY, YEAR, HR, MIN, SEC )
+
+                Where ---
+                   FILNAM = Name of file to return date/time.
+                            May include drive and subdirectory (no wild-
+                            cards).  Must end with either a null (00h
+                            byte) or the character '|'
+                            Example:  'C:\DIR1\SUBDIR1\JUNK.DAT|'
+                   MONTH  = Integer month       (1 to 12
+                                                 1=Jan, 2=Feb, etc.)
+                   DAY    = Integer day         (1 to 31)
+                   YEAR   = Integer year        (1980 to 2099)
+                   HR     = Integer hour        (0 to 23)
+                   MIN    = Integer minutes     (0 to 59)
+                   SEC    = Integer seconds     (0 to 59)
+                NOTE - If file does not exist, date/time is
+                       returned as 0,0,1980  0,0,0
+
+
+
+        SETDNT       (Set file date and time)
+
+             Character  FILNAM*n
+             Integer*2  MONTH, DAY, YEAR, HR, MIN, SEC, IER
+
+             call SETDNT ( FILNAM, MONTH, DAY, YEAR, HR, MIN, SEC, IER )
+
+                Where ---
+                   FILNAM = Name of file to set date/time.
+                            May include drive and subdirectory (no wild-
+                            cards).  Must end with either a null (00h
+                            byte) or the character '|'
+                            Example:  'C:\DIR1\SUBDIR1\JUNK.DAT|'
+                   MONTH  = Integer month       (1 to 12
+                                                 1=Jan, 2=Feb, etc.)
+                   DAY    = Integer day         (1 to 31)
+                   YEAR   = Integer year        (1980 to 2099)
+                   HR     = Integer hour        (0 to 23)
+                   MIN    = Integer minutes     (0 to 59)
+                   SEC    = Integer seconds     (0 to 59)
+                   IER    = Error flag on set date/time
+                                      (0=file date/time set
+                                       1=ERROR, file date/time not set)
+
+
+
+
+
+
+
+                                          7
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        FLINFO       (Return system information about file)
+
+             Character  FILNAM*n, FDATE*8, FTIME*6
+             Integer*4  ISIZ
+             Integer*2  IATRIB
+
+             call FLINFO ( FILNAM, ISIZ, IATRIB, FDATE, FTIME )
+
+                Where ---
+                   FILNAM = Name of file to return system information.
+                            May include drive and subdirectory (no wild-
+                            cards).  Must end with either a null (00h
+                            byte) or the character '|'
+                            Example:  'C:\DIR1\SUBDIR1\JUNK.DAT|'
+                   ISIZ   = File size      (0 if file does not exist)
+                   IATRIB = File attribute (0 if file does not exist)
+                                 Bit 0 Set ==> File is Read-Only
+                                 Bit 1 Set ==> File is Hidden
+                                 Bit 2 Set ==> File is System
+                                 Bit 4 Set ==> File is Subdirectory
+                                 Bit 5 Set ==> Files archive bit is set
+                                 Other bits are reserved
+                   FDATE  = File date of last write  ('MM/DD/YY')
+                                           (blank if file does not exist)
+                   FTIME  = File time of last write  ('HH:MMa')
+                                           (blank if file does not exist)
+
+
+
+        IFLSIZ       (Return size of file)
+
+             Character  FILNAM*n
+             Integer*4  ISIZ, IFLSIZ
+
+             ISIZ = IFLSIZ ( FILNAM )
+
+                Where ---
+                   FILNAM = Name of file for size.
+                            May include drive and subdirectory (no wild-
+                            cards).  Must end with either a null (00h
+                            byte) or the character '|'
+                            Example:  'C:\DIR1\SUBDIR1\JUNK.DAT|'
+                   IFLSIZ = Integer*4 Function returns file size in bytes
+                                      (0 if file does not exist)
+
+
+
+
+
+
+
+
+
+
+
+                                          8
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        IRECLN       (Return record length of direct access ASCII file)
+
+             Character  FILNAM*n
+             Integer*2  IRECLN, LENG
+
+             LENG = IRECLN ( FILNAM )
+
+                Where ---
+                   FILNAM = Name of file for record length.
+                            May include drive and subdirectory (no wild-
+                            cards).  Must end with either a null (00h
+                            byte) or the character '|'
+                            Example:  'C:\DIR1\SUBDIR1\JUNK.DAT|'
+                       NOTE - File must be closed
+                   IRECLN = Integer*2 Function returns record length of
+                            direct access ASCII file
+                                 (0 if file does not exist or there is no
+                                  CR within the 1st 1024 bytes)
+
+
+
+        LEXIST    (Check to see if file exists)
+
+             Character  FILNAM*n
+             Logical*2  LEXIST, EXST
+
+             EXST = LEXIST ( FILNAM )
+
+                or
+
+             IF ( LEXIST(FILNAM) )  THEN
+                ....
+
+                Where ---
+                   FILNAM = Name of file to check for existence.
+                            May include drive and subdirectory (no wild-
+                            cards).  Must end with either a null (00h
+                            byte) or the character '|'
+                            Example:  'C:\DIR1\SUBDIR1\JUNK.DAT|'
+                   LEXIST = Logical Function returns file existence
+                                      .TRUE. = FILNAM exists
+                                      .FALSE. = FILNAM does not exist
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          9
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        PTHFND       (Find a file by searching the DOS path)
+
+           NOTE: PTHFND must be used before any files are assigned!!!
+
+             Character  FILE*12, PFILE*80
+             Integer*2  NCHR
+
+             CALL PTHFND ( FILE, PFILE, NCHR )
+
+                where ---
+                   FILE   = 12 character file name to search for in path
+                            FORM: nnnnnnnn.eee  (must not include drive)
+                   PFILE  = Full path and file name (if found) including
+                            the ending NULL
+                   NCHR   = Number of characters returned in PFILE
+                            NCHR = 0   FILE not found in path
+                            NCHR > 0   Number of characters in PFILE
+                                         including the ending NULL
+
+
+
+        IOLDST       (Compare date/time of two files)
+
+             Character  FILNAM*n, FILNM2*m
+             Integer*2  IOLDST, IOLD
+
+             IOLD = IOLDST ( FILNAM, FILNM2 )
+
+                Where ---
+                   FILNAM = Name of 1st file for date/time comparison.
+                            May include drive and subdirectory (no wild-
+                            cards).  Must end with either a null (00h
+                            byte) or the character '|'
+                            Example:  'C:\DIR1\SUBDIR1\JUNK.DAT|'
+                   FILNM2 = Name of 2nd file for date/time comparison.
+                            May include drive and subdirectory (no wild-
+                            cards).  Must end with either a null (00h
+                            byte) or the character '|'
+                            Example:  'C:\DIR1\SUBDIR1\JUNK.BAK|'
+                   IOLDST = Integer*2 Function indicates oldest file
+                                      (-2  FILNM2 does not exist
+                                       -1  FILNAM does not exist
+                                        0  FILNAM & FILNM2 same date/time
+                                        1  FILNAM is older than FILNM2
+                                        2  FILNM2 is older than FILNAM)
+
+
+
+
+
+
+
+
+
+
+                                          10
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        SETARC       (Set or clear the archive flag for a file)
+
+             Integer*2  IARCH, IER
+             Character  FILNAM*n
+
+             CALL SETARC ( FILNAM, IARCH, IER )
+
+                Where ---
+                  FILNAM = Name of the file to modify archive flag
+                            May include drive and subdirectory (no wild-
+                            cards).  Must end with either a null (00h
+                            byte) or the character '|'
+                            Example:  'C:\DIR1\SUBDIR1\JUNK.DAT|'
+                  IARCH  = Archive flag function  0=clear  1=set
+
+                  IER    = Error flag  0=okay
+                                      (1=function code invalid
+                                       2=file not found
+                                       3=path not found or no file
+                                       5=could not change attribute)
+
+
+        GATRIB       (Return file attributes)
+
+             Integer*2  IRW, IHID, ISYS, IARCH, IER
+             Character  FILNAM*n
+
+             CALL GATRIB ( FILNAM, IRW, IHID, ISYS, IARCH, IER )
+
+                Where ---
+                  FILNAM = Name of the file to modify archive flag
+                            May include drive and subdirectory (no wild-
+                            cards).  Must end with either a null (00h
+                            byte) or the character '|'
+                            Example:  'C:\DIR1\SUBDIR1\JUNK.DAT|'
+                  IRW    = Read Only Flag
+
+                  IHID   = Hidden File Flag
+
+                  ISYS   = System File Flag
+
+                  IARCH  = Arhive Flag
+
+                  IER    = Error flag  0=okay
+                                      (1=function code invalid
+                                       2=file not found
+                                       3=path not found or no file)
+
+
+
+
+
+
+
+
+                                          11
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        DISK DRIVE Utilities        ____________________
+
+             These routines will return and set the default drive, return
+        the space or size of any disk, return the disk volume label,
+        return the number of harddisk drives, and check the status of
+        floppy disk drives.
+
+
+        Summary
+
+             Return default drive
+
+                drv   = IGTDRV ( DUMMY )
+
+             Set default drive
+
+                call SETDRV ( IDRV )
+
+             Return space on a disk
+
+                dspc  = IDSKSP ( IDRV )
+
+             Return size of a disk
+
+                dsiz  = IDSKSZ ( IDRV )
+
+             Check status of floppy disk drives
+
+                istat = IDSTAT ( IDRV )
+
+             Return disk volume label
+
+                call VOLUME ( IDRV, LABEL )
+
+             Return number of harddisk drives
+
+                numhd = NMHDRV ( DUMMY )
+
+
+        IGTDRV       (Return default drive)
+
+             Integer*2  IGTDRV, IDRV
+
+             IDRV = IGTDRV ( DUMMY )
+
+                where ---
+                   IGTDRV = Integer*2 Function returns default drive
+                                      (1=A, 2=B, 3=C, etc)
+                   DUMMY  = Dummy argument, used as place keeper
+
+
+
+
+
+
+                                          12
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        SETDRV       (Change default drive)
+
+             Integer*2  IDRV
+
+             call SETDRV ( IDRV )
+
+                where ---
+                   IDRV   = Drive number to set as default
+                                      (1=A, 2=B, 3=C  etc)
+                       NOTE - If drive selection in invalid,
+                              default drive is not changed
+
+
+
+        IDSKSP       (Return space on a disk in bytes)
+
+             Integer*2  IDRV
+             Integer*4  IDSKSP, DSPC
+
+             DSPC = IDSKSP ( IDRV )
+
+                Where ---
+                   IDRV   = Drive number for space check.
+                                           (0=Current, 1=A, 2=B, etc)
+                       NOTE - No error checking on drive selection
+                   IDSKSP = Integer*4 Function returns available space
+                            on the disk in bytes
+
+
+
+        IDSKSZ       (Return size of a disk in bytes)
+
+             Integer*2  IDRV
+             Integer*4  IDSKSZ, DSIZ
+
+             DSIZ = IDSKSZ ( IDRV )
+
+                where ---
+                   IDRV   = Drive number for size check.
+                                           (0=Current, 1=A, 2=B, etc)
+                       NOTE - No error checking on drive selection
+                   IDSKSZ = Integer*4 Function returns size of the
+                            disk in bytes
+
+
+
+
+
+
+
+
+
+
+
+
+                                          13
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        IDSTAT       (Check status of floppy drive)
+
+             Integer*2  IDRV, IDSTAT, ISTAT
+
+             ISTAT = IDSTAT ( IDRV )
+
+                where ---
+                   IDRV   = Drive number for status check.
+                                           (1=A, 2=B   ONLY)
+                       NOTE - No error checking on drive selection
+                   IDSTAT = Integer*2 Function returns status of
+                            floppy drive
+                                 (0  Floppy is ready to use
+                                  1  No diskette in drive
+                                  2  Diskette in drive is unformatted or
+                                     a 1.2Mb diskette is in a 360Kb drive
+                                  3  Miscellaneous error)
+
+
+
+        NMHDRV       (Return number of harddisk drives)
+
+             Integer*2  NMHDRV, NUMHD
+
+             NUMHD = NMHDRV ( DUMMY )
+
+                where ---
+                   NMHDRV = Integer*2 Function returns number of harddisk
+                            drives (All drives know to DOS  C: and above)
+                   DUMMY  = Dummy argument, used as place keeper
+
+
+
+        VOLUME       (Return disk volume label)
+
+             Integer*2  IDRV
+             Character  LABEL*11
+
+             call VOLUME ( IDRV, LABEL )
+
+                where ---
+                   IDRV   = Drive number for volume.
+                                           (0=Current, 1=A, 2=B, etc)
+                       NOTE - No error checking on drive selection
+                   VOLUME = Disk volume label (blank if none)
+
+
+
+
+
+
+
+
+
+
+                                          14
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        SUBDIRECTORY Utilities        ______________________
+
+
+             These routines will create, change, rename, and remove sub-
+        directories, and return the current subdirectory path.
+
+
+        Summary
+
+             Create a subdirectory
+
+                call MKDIR  ( SUBDIR, IER )
+
+             Change current subdirectory
+
+                call CHDIR  ( SUBDIR, IER )
+
+             Rename a subdirectory
+
+                call RENDIR ( OLDDIR, NEWDIR, IER )
+
+             Remove a subdirectory
+
+                call RMDIR  ( SUBDIR, IER )
+
+             Return current subdirectory path
+
+                call CURDIR ( IDRV, CPATH, IER )
+
+
+        MKDIR    (Create a subdirectory)
+
+             Integer*2  IER
+             Character  SUBDIR*n
+
+             call MKDIR ( SUBDIR, IER )
+
+                where ---
+                   SUBDIR = Subdirectory name to create
+                            Must end with a null (00h byte) or the char-
+                            acter '|'.  If SUBDIR starts with '\' it is
+                            the complete path.  If the leading '\' is
+                            omitted, SUBDIR is assumed to be a subdirec-
+                            tory in the current directory
+                       NOTE - Same rules as DOS command MKDIR
+                            Example:  '\DIR\SUBDIR1\SUBSUB2|'
+                   IER    = Error flag on create subdirectory
+                                 (0=subdirectory created
+                                  1=ERROR, subdirectory not created)
+
+
+
+
+
+
+                                          15
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        CHDIR    (Change current subdirectory)
+
+             Integer*2  IER
+             Character  SUBDIR*n
+
+             call CHDIR ( SUBDIR, IER )
+
+                where ---
+                   SUBDIR = Name to make current subdirectory
+                            Must end with a null (00h byte) or the char-
+                            acter '|'.  If SUBDIR starts with '\' it is
+                            the complete path.  If the leading '\' is
+                            omitted, SUBDIR is assumed to be a subdirec-
+                            tory in the current directory.  IF SUBDIR is
+                            '..|' the new subdirectory is one level up
+                            toward the root directory.
+                       NOTE - Same rules as DOS command CHDIR
+                            Example:  '\DIR\SUBDIR1\SUBSUB2|'
+                   IER    = Error flag on change current subdirectory
+                                 (0=current directory changed
+                                  1=ERROR, current directory not changed)
+
+
+
+        RENDIR       (Rename a subdirectory)
+
+             Integer*2  IER
+             Character  OLDDIR*11, NEWDIR*11
+
+             call RENDIR ( OLDDIR, NEWDIR, IER )
+
+                where ---
+                   OLDDIR = Subdirectory name to rename
+                            Must be in current directory (up to 11 char-
+                            acters with trailing blanks if necessary)
+                       NOTE - DO NOT terminate with null or '|'
+                            Example:  'SUBDIR1    '
+                   NEWDIR = OLDDIR will be renamed NEWDIR
+                            Will be in current directory (up to 11 char-
+                            acters with trailing blanks if necessary)
+                       NOTE - DO NOT terminate with null or '|'
+                            Example:  'SUBDIR2    '
+                   IER    = Error flag on rename subdirectory
+                                 (0=subdirectory renamed
+                                  1=ERROR, subdirectory not renamed)
+
+
+
+
+
+
+
+
+
+
+                                          16
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        RMDIR    (Remove a subdirectory)
+
+             Integer*2  IER
+             Character  SUBDIR*n
+
+             call RMDIR ( SUBDIR, IER )
+
+                where ---
+                   SUBDIR = Subdirectory name to remove
+                            Must end with a null (00h byte) or the char-
+                            acter '|'.  If SUBDIR starts with '\' it is
+                            the complete path.  If the leading '\' is
+                            omitted, SUBDIR is assumed to be a subdirec-
+                            tory in the current directory
+                       NOTE - Same rules as DOS command RMDIR (the subdi-
+                            rectory SUBDIR must be empty)
+                            Example:  '\DIR\SUBDIR1\SUBSUB2|'
+                   IER    = Error flag on remove subdirectory
+                                 (0=subdirectory removed
+                                  1=ERROR, subdirectory not removed)
+
+
+
+        CURDIR       (Return current subdirectory path)
+
+             Integer*2  IDRV, IER
+             Character  CPATH*65
+
+             call CURDIR ( IDRV, CPATH, IER )
+
+                where ---
+                   IDRV   = Drive number to get current subdirectory
+                                 (0=Current, 1=A, 2=B, etc)
+                   CPATH  = Returned full subdirectory name from the root
+                            Does not include drive, starts with '\' and
+                            ends with a null (00h byte)
+                   IER    = Error flag on return current subdirectory
+                                 (0=current directory returned in CPATH
+                                  1=ERROR, current path not returned)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          17
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        WRITE VERIFY utilities        ______________________
+
+
+             These routines will set and return the DOS write verify
+        flag.
+
+
+        Summary
+
+             Return the write verify flag
+
+                iver = IGTVER ( DUMMY )
+
+             Set write verify flag ON
+
+                call VERON
+
+             Set write verify flag OFF
+
+                call VEROFF
+
+
+        IGTVER       (Return current DOS write verify flag setting)
+
+             Integer*2  IGTVER, IVER
+
+             IVER = IGTVER ( DUMMY )
+
+                where ---
+                   IGTVER = Integer*2 function returns write verify flag
+                                 (0=verify off
+                                  1=verify on)
+                   DUMMY  = Dummy argument, used as place keeper
+
+
+
+        VERON    (Set DOS write verify flag on)
+
+             CALL VERON
+
+
+
+        VEROFF       (Set DOS write verify flag off)
+
+             CALL VEROFF
+
+
+
+
+
+
+
+
+
+
+                                          18
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        COMMAND LINE utilities        ______________________
+
+
+             This routine will return the command tail for the current
+        command.
+
+        NOTE - This routine must be used before any files are assigned!!!
+
+
+        CMDLIN       (Return command line)
+
+
+             Character  LINE*80
+             Integer*2  NCHAR
+
+             CALL CMDLIN ( LINE, NCHAR )
+
+                where ---
+                   LINE   = Command string starting after the blank
+                            following the command name
+                   NCHAR  = Number of characters returned in LINE
+                                 (0=no command line)
+
+
+
+        Miscellaneous DOS Functions        ___________________________
+
+
+             These routines return the DOS version number and the number
+        of free bytes in conventional memory.
+
+        DOSVER       (Return DOS version)
+
+             Integer*2  MAJORV, MINORV
+
+             CALL DOSVER ( MAJORV, MINORV )
+
+                where ---
+                   MAJORV = Major version number  (MS-DOS 2.1 = 2, etc)
+
+                   MINORV = Minor version number  (MS-DOS 2.1 = 10, etc)
+
+
+
+        MEMFRE       (Return amount of free conventional memory)
+             Integer*4  MAXMEM, MEMFRE
+
+             MAXMEM = MEMFRE ( idum )
+
+                where ---
+                   MEMFRE = Integer*4 function which returns the number
+                            of bytes free (IDUM is a required dummy
+                            parameter and is unused).
+
+
+                                          19
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        ENVIRONMENT utilities        _____________________
+
+
+             These routines return values from the current DOS environ-
+        ment table.
+
+               NOTE - If using DOS 2.xx or below, these routines must be
+               called from the main program unit.
+
+
+        Summary
+
+             Return SET value from environment
+
+                call CHKENV ( SETSTR, NCMAX, ENVAL, NCEVAL )
+
+             Return program name
+
+                call PROGNM ( NCMAX, PROG, NCPROG )
+
+             Return complete environment table
+
+                call rdenv  ( NCMAX, ENV, NCENV )
+
+
+        CHKENV       (Return value placed in environment using SET)
+
+             Character  SETSTR*n, ENVAL*n
+             Integer*2  NCMAX, NCEVAL
+
+             CALL CHKENV ( SETSTR, NCMAX, ENVAL, NCEVAL )
+
+                where ---
+                   SETSTR = The SET string to match (ending with '=')
+                            Example:  'LIB='
+                   NCMAX  = Maximum number of characters to return in
+                            ENVAL
+                   ENVAL  = The environment table value set using the
+                            DOS SET command with SETSTR
+                   NCEVAL = Actual number of characters returned in ENVAL
+                            NCEVAL = 0   SETSTR not in environment table
+                            NCEVAL > 0   Number of characters in ENVAL
+                                         including the ending NULL
+
+
+
+
+
+
+
+
+
+
+
+
+                                          20
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        PROGNM       (Return the full name of the current program)
+
+             Character  PROG*n
+             Integer*2  NCMAX, NCPROG
+
+             CALL PROGNM ( NCMAX, PROG, NCPROG )
+
+                where ---
+                   NCMAX  = Maximum number of characters to return in
+                            PROG
+                   PROG   = Full name of the current program (including
+                            the drive and path)
+                   NCPROG = Actual number of characters returned in PROG
+                            including the ending NULL
+
+
+
+        RDENV       (Return the complete environment table)
+
+             Character  ENV*n
+             Integer*2  NCMAX, NCENV
+
+             CALL RDENV ( NCMAX, ENV, NCENV )
+
+                where ---
+                   NCMAX  = Maximum number of characters to return in
+                            ENV
+                   ENV    = Environment table (including the ending
+                            double NULL)
+                   NCENV  = Actual number of characters returned in ENV
+                            including the ending double NULL
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          21
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        DISPLAY FUNCTIONS
+        _________________
+
+
+             Display characters and strings of characters on the standard
+        output device.
+
+
+        Summary
+
+             Display a single character
+
+                call DISPC ( CHR )
+
+             Display a counted character string
+
+                call DISPMC ( NCHR, STRING )
+
+             DISPLAY a character string
+
+                call DISPST ( STRING )
+
+
+        DISPC     (Display a single character)
+
+             Character   CHR
+
+             call DISPC  ( CHR )
+
+                where ---
+                   CHR    = Character to display at current cursor
+                            position
+
+
+
+        DISPMC    (Display a counted character string)
+
+             Character   STRING*nchr
+             Integer*2   NCHR
+
+             call DISPMC ( NCHR, STRING )
+
+                where ---
+                   NCHR   = Number of characters in STRING to display
+                   STRING = String of characters to display starting
+                            at the current cursor position
+
+
+
+
+
+
+
+
+
+                                          22
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        DISPST    (Display a character string)
+
+             Character   STRING*n
+
+             call DISPST ( STRING )
+
+                where ---
+                   STRING = String of characters to display starting at
+                            the current cursor position
+                       NOTE:  Must end with '$' ('$' is not displayed)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          23
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        PRINTER FUNCTIONS
+        _________________
+
+
+             Send characters and strings of characters to a printer port.
+
+
+        Summary
+
+             Return status of Printer Port
+
+                istat = IPSTAT ( IPORT )
+
+             Print a single character
+
+                call PRNTC ( IPORT, CHAR, IER )
+
+             Print a counted string
+
+                call PRNTMC ( IPORT, NCHAR, STRING, IER )
+
+             Print a character string
+
+                call PRNTST ( IPORT, STRING, IER )
+
+
+        IPSTAT     (Return status of Printer Port)
+
+             Integer*2   IPSTAT, ISTAT, IPORT
+
+             ISTAT = IPSTAT ( IPORT )
+
+                where ---
+                   IPORT  = Printer port (1=LPT1, 2=LPT2)
+                   IPSTAT = Integer*2 function returning printer status
+                         IPSTAT = 0  Printer ready
+                                  1  Port out of range (not 1 or 2)
+                                  2  printer busy
+                                  3  printer out of paper
+                                  4  Printer off-line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          24
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        PRNTC     (Print a single character)
+
+             Character   CHR
+             Integer*2   IPORT, IER
+
+             call PRNTC  ( IPORT, CHR, IER )
+
+                where ---
+                   IPORT  = Printer port (1=LPT1, 2=LPT2)
+                   CHR    = Character to print
+                   IER    = Status of the print operation
+                            IER = 0  Character printed, printer ready
+                                  1  Port out of range (not 1 or 2)
+                                  2  printer busy
+                                  3  printer out of paper
+                                  4  Printer off-line, can't print
+
+
+
+        PRNTMC    (Print a counted character string)
+
+             Character   STRING*nchr
+             Integer*2   IPORT, NCHR, IER
+
+             call PRNTMC ( IPORT, NCHR, STRING, IER )
+
+                where ---
+                   IPORT  = Printer port (1=LPT1, 2=LPT2)
+                   NCHR   = Number of characters in STRING to print
+                   STRING = String of characters to print
+                   IER    = Status of the print operation
+                            IER = 0  String printed, printer ready
+                                  1  Port out of range (not 1 or 2)
+                                  2  printer busy
+                                  3  printer out of paper
+                                  4  Printer off-line, can't print
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          25
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        PRNTST    (Print a character string)
+
+             Character   STRING*n
+             Integer*2   IPORT, IER
+
+             call PRNTST ( IPORT, STRING, IER )
+
+                where ---
+                   IPORT  = Printer port (1=LPT1, 2=LPT2)
+                   STRING = String of characters to print
+                            NOTE: Must end with '$' ('$' is not printed)
+                   IER    = Status of the print operation
+                            IER = 0  String printed, printer ready
+                                  1  Port out of range (not 1 or 2)
+                                  2  printer busy
+                                  3  printer out of paper
+                                  4  Printer off-line, can't print
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          26
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        COMPORT FUNCTIONS
+        _________________
+
+
+             Initialize and send characters to a communications port.
+
+
+        Summary
+
+             Initialize communication Port
+
+                call INTCOM ( ICOM, IPARAM, IER )
+
+             Send a counted string
+
+                call SENDMC ( ICOM, NCHR, STRING, IER )
+
+
+        INTCOM     (Initialize the communications port)
+
+             Integer*2   ICOM, IPARAM, IER
+
+             CALL INTCOM ( ICOM, IPARAM, IER )
+
+                where ---
+                   ICOM   = Communications port (1=COM1, 2=COM2, etc.)
+                   IPARAM = Packed initialization parameter
+                      bits  7,6,5        4,3          2          1,0
+                         Baud Rate      Parity    stop bits   word length
+                      ---------------------------------------------------
+                      000 =  110 baud  00 = none  0 = 1 bit   10 = 7 bits
+                      001 =  150 baud  01 = odd   1 = 2 bits  11 = 8 bits
+                      010 =  300 baud  11 = even
+                      011 =  600 baud
+                      100 = 1200 baud
+                      101 = 2400 baud
+                      110 = 4800 baud
+                      111 = 9600 baud
+                   IER    = Port status error code
+                            IER = 0  Port initialized
+                                  1  Port not initialized
+                                 FFh Port invalid (less than 1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          27
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        SENDMC    (Send a counted character string)
+
+             Character   STRING*nchr
+             Integer*2   ICOM, NCHR, IER
+
+             call SENDMC ( ICOM, NCHR, STRING, IER )
+
+                where ---
+                   ICOM   = Communication port (1=COM1, 2=COM2, etc.)
+                   NCHR   = Number of characters in STRING to print
+                   STRING = String of characters to print
+                   IER    = Status of the print operation
+                            IER = 0  String sent
+                                  1  Port number invalid (less than 1)
+                                  2  Could not send string
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          28
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        KEYBOARD FUNCTIONS
+        __________________
+
+
+        Get keys from the keyboard.
+
+        Summary
+
+             Wait for a key and echo it
+
+                call GTKEYE ( ICHR, ACHR )
+
+             Wait for a key and do not echo it
+
+                call GTKEYS ( ICHR, ACHR )
+
+             Get a key if one is ready and echo it
+
+                nk = IGTKYE ( ICHR, ACHR )
+
+             Get a key if one is ready and do not echo it
+
+                nk = IGTKEY ( ICHR, ACHR )
+
+             Flush the keyboard type-ahead buffer
+
+                call KBFLSH
+
+             Read the keyboard buffer
+
+                call KBUFIN ( MXCHR, NCHR, BUF )
+
+             Check to see if a key is ready
+
+                nk = KEYRDY ( DUMMY )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          29
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        GTKEYE    (Wait for a key and echo it on the screen)
+        GTKEYS    (Wait for a key and do not echo it on the screen)
+
+             Character   ACHR*2
+             Integer*2   ICHR(2)
+
+             call GTKEYE ( ICHR, ACHR )
+             call GTKEYS ( ICHR, ACHR )
+
+                where ---
+                   ICHR   = Integer value of key according to ASCII table
+                            ICHR(1)=key  and ICHR(2)=0  for ASCII
+                            ICHR(1)=0 and ICHR(2)=code  for Extended keys
+                                      i.e. Function keys & Keypad keys
+                   ACHR   = Character value of key
+                            ACHR(1:1)=key and ACHR(2:2)=nul  for ASCII
+                            ACHR(1:1)=nul and ACHR(2:2)=code for Extended
+                                keys   i.e. Function keys & Keypad keys
+
+
+
+        IGTKYE    (Get a key if one is ready, echo it on the screen)
+        IGTKEY    (Get a key if one is ready, do not echo it)
+
+             Character   ACHR*2
+             Integer*2   ICHR(2), iflg, igtkey, igtkye
+
+             iflg = IGTKYE ( ICHR, ACHR )
+             iflg = IGTKEY ( ICHR, ACHR )
+
+                where ---
+                   IGTKEY = Integer*2 function returns key found flag
+                            (0=key not ready, nothing returned
+                             1=key ready and returned in ICHR and ACHR)
+                   IGTKYE = Integer*2 function returns key found flag
+                            (0=key not ready, nothing returned
+                             1=key ready, returned in ICHR and ACHR and
+                             echoed)
+                   ICHR   = Integer value of key according to ASCII table
+                            ICHR(1)=key  and ICHR(2)=0  for ASCII
+                            ICHR(1)=0 and ICHR(2)=code  for Extended keys
+                   ACHR   = Character value of key according to ASCII
+                            ACHR(1:1)=key and ACHR(2:2)=nul  for ASCII
+                            ACHR(1:1)=nul and ACHR(2:2)=code for Extended
+                                keys   i.e. Function keys & Keypad keys
+
+
+
+
+
+
+
+
+
+
+                                          30
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        KBFLSH    (Flush keyboard type-ahead buffer)
+
+             call KBFLSH
+
+              NOTE -- Call KBFLSH when you want to eliminate any keys
+                   that are in the type ahead buffer. This forces a new
+                   key stroke to enter the desired data. KBFLSH may be
+                   used prior to any of the keyboard routines.
+
+
+
+        KBUFIN    (Read the keyboard buffer)
+
+             Character   BUF(mxchr)
+             Integer*2   MXCHR, NCHR
+
+             call KBUFIN ( MXCHR, NCHR, BUF )
+
+                where ---
+                   MXCHR  = Maximum number of characters to get from the
+                            keyboard. Also, minimum dimension of BUF.
+                            NOTE -- MXCHR is limited to 80
+                   NCHR   = Actual number of characters in buffer
+                            NOTE -- NCHR does not include the carriage
+                            return although the carriage return is placed
+                            in BUF. Thus, NCHR will never exceed MXCHR-1.
+                   BUF    = Array of characters returned. Always ends
+                            with a carriage return.
+                            NOTE -- You may use any DOS editing key to
+                                 correct the string as it is typed. The
+                                 string is accepted and returned when
+                                 ENTER is pressed.
+
+
+
+        KEYRDY    (Check for key ready)
+
+             Integer*2   iflg, keyrdy
+
+             iflg = KEYRDY ( DUMMY )
+
+                where ---
+                   KEYRDY = Integer*2 function returns key ready flag
+                            (0=key not ready
+                             1=key ready for keyboard routines)
+                   DUMMY  = Dummy argument, used as place keeper
+
+
+
+
+
+
+
+
+
+                                          31
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        VIDEO FUNCTIONS
+        _______________
+
+
+        Cursor Utilities        ________________
+
+
+             Turn cursor off, set cursor to any size, get position and
+        size of cursor and position cursor.
+
+
+        Summary
+
+             Turn cursor off
+
+                call CUROFF
+
+             Set cursor size
+
+                call CURSOR ( ITOP, IBOT )
+
+             Return cursor position and size
+
+                call GETCUR ( IROW, ICOL, ITOP, IBOT )
+
+             Position cursor on the screen
+
+                call POSCUR ( IROW, ICOL )
+
+
+        CUROFF    (Turn cursor off)
+
+             call CUROFF
+
+
+
+        CURSOR    (Set cursor size)
+
+             Integer*2   ITOP, IBOT
+
+             call CURSOR ( ITOP, IBOT )
+
+                where ---
+                   ITOP   = Top pixel row for cursor
+                   IBOT   = Bottom pixel row for cursor
+                         NOTE - CGA cursor maximum size is ITOP=0 IBOT=7
+                               MONO cursor maximum size is ITOP=0 IBOT=13
+
+                         Example: CGA block cursor       ITOP=0, IBOT=7
+                                  CGA under bar cursor   ITOP=6, IBOT=7
+                                  CGA dash cursor        ITOP=3, IBOT=4
+                                 MONO block cursor       ITOP=0, IBOT=13
+                                 MONO under bar cursor   ITOP=12,IBOT=13
+
+
+                                          32
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        GETCUR    (Get cursor position and size)
+
+             Integer*2   IROW, ICOL, ITOP, IBOT
+
+             call GETCUR ( IROW, ICOL, ITOP, IBOT )
+
+                where ---
+                   IROW   = Row position of cursor
+                   ICOL   = Column position of cursor
+                       NOTE - Row/Column range is based on the video mode
+                         Modes 0 & 1
+                             Screen upper left (0,0), lower right (24,39)
+                         Modes 2 & 3
+                             Screen upper left (0,0), lower right (24,79)
+                   ITOP   = Top pixel row for cursor
+                   IBOT   = Bottom pixel row for cursor
+                       NOTE - CGA cursor maximum size is ITOP=0 IBOT=7
+                             MONO cursor maximum size is ITOP=0 IBOT=13
+
+
+
+        POSCUR    (Position cursor)
+
+             Integer*2   IROW, ICOL
+
+             call POSCUR ( IROW, ICOL )
+
+                where ---
+                   IROW   = Row position of cursor
+                   ICOL   = Column position of cursor
+                       NOTE - Row/Column range is based on the video mode
+                         Modes 0 & 1
+                             Screen upper left (0,0), lower right (24,39)
+                         Modes 2 & 3
+                             Screen upper left (0,0), lower right (24,79)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          33
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        Video Mode and Clear Screen Utilities        _____________________________________
+
+
+             Clear screen, scroll portion of screen up or down,
+        set/return video mode and active video page, swap video pages 0
+        and 1 and print screen.
+
+
+        Summary
+
+             Clear the screen
+
+                call CLS
+
+             Return active video page
+
+                iap = IGTAPG ( DUMMY )
+
+             Return video mode
+
+                imd = IGTMOD ( DUMMY )
+
+             Swap video pages 0 and 1
+
+                call PGSWAP
+
+             Print the screen
+
+                call PSCRN
+
+             Scroll window on screen down
+
+                call SCRLDN ( NLINS, IRUL,ICUL, IRLR,ICLR )
+
+             Scroll window on page up
+
+                call SCRLUP ( NLINS, IRUL,ICUL, IRLR,ICLR )
+
+             Set active video page
+
+                call SETAPG ( IAP )
+
+             Set video mode
+
+                call SETMOD ( IMODE )
+
+
+        CLS       (Clear screen)
+
+             call CLS
+
+
+
+
+
+                                          34
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        IGTAPG    (Return active video page)
+
+             Integer*2   IAP, IGTAPG
+
+             IAP = IGTAPG ( dummy )
+
+                where ---
+                   IGTAPG = Integer*2 function returns the active video
+                            page
+                      NOTE - Video modes 0 & 1 have 8 video pages, 0 to 7
+                             Video modes 2 & 3 have 4 video pages, 0 to 3
+                   DUMMY  = Dummy argument, used as place keeper
+
+
+
+        IGTMOD    (Return video mode)
+
+             Integer*2   IMODE, IGTMOD
+
+             IMODE = IGTMOD ( dummy )
+
+                where ---
+                   IGTMOD = Integer*2 function returns the video mode
+                      NOTE - video mode 0 = 40x25 BW
+                                        1 = 40x25 Color
+                                        2 = 80x25 BW
+                                        3 = 80x25 Color
+                                       Graphics modes
+                                        4 = 320x200 Color
+                                        5 = 320x200 BW
+                                        6 = 640x200 BW
+                                        7 = Mono
+                   DUMMY  = Dummy argument, used as place keeper
+
+
+
+        PGSWAP    (Swap video pages 0 and 1)
+
+             call PGSWAP
+
+              NOTE - Normally used in conjunction with HWRITE and HWRITN
+                   routines which do 'hidden' writes to the alternate
+                   video page. PGSWAP clears the active video page and
+                   makes the 'hidden' video page active. The page swap
+                   only applies to video pages 0 and 1.
+
+
+
+        PSCRN     (Print screen)
+
+             call PSCRN
+
+              NOTE - Similar to 'Shift-PrtSc' followed by a form feed
+
+
+                                          35
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        SCRLDN    (Scroll window down)
+        SCRLUP    (Scroll window up)
+
+             Integer*2   NLINS, IRUL, ICUL, IRLR, ICLR
+
+             call SCRLDN ( NLINS, IRUL,ICUL, IRLR, ICLR )
+             call SCRLUP ( NLINS, IRUL,ICUL, IRLR, ICLR )
+
+                where ---
+                   NLINS  = Number of lines to scroll window
+                      NOTE - Lines blanked at widow top for SCRLDN
+                             Lines blanked at widow bottom for SCRLUP
+                             If NLINS is 0, the entire window is blanked
+                   IRUL   = Row of upper left corner of the window
+                   ICUL   = Column of upper left corner of the window
+                   IRLR   = Row of lower right corner of the window
+                   ICLR   = Column of lower right corner of the window
+                      NOTE - Row/Column range is based on the video mode
+                        Modes 0 & 1
+                            Screen upper left (0,0), lower right (24,39)
+                        Modes 2 & 3
+                            Screen upper left (0,0), lower right (24,79)
+
+
+
+        SETAPG    (Set active video page)
+
+             Integer*2   IAP
+
+             call SETAPG ( IAP )
+
+                where ---
+                   IAP    = Video page to make active
+                      NOTE - Video modes 0 & 1 have 8 video pages, 0 to 7
+                             Video modes 2 & 3 have 4 video pages, 0 to 3
+
+
+        SETMOD    (Set video mode)
+
+             Integer*2   IMODE
+
+             call IGTMOD ( IMODE )
+
+                where ---
+                   IMODE  = Selected video mode
+                      NOTE - video mode 0 = 40x25 BW
+                                        1 = 40x25 Color
+                                        2 = 80x25 BW
+                                        3 = 80x25 Color
+                                       Graphics modes
+                                        4 = 320x200 Color
+                                        5 = 320x200 BW
+                                        6 = 640x200 BW
+                                        7 = Mono
+
+                                          36
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        Screen Write Utilities        ______________________
+
+
+             Write character string to active video page, 'hidden' video
+        page, or any video page.
+
+
+        Summary
+
+             Write string to 'hidden' video page
+
+                call  HWRITE ( IROW,ICOL, IATRB, STRNG )
+
+             Write counted string to 'hidden' video page
+
+                call  HWRITN ( IROW,ICOL, IATRB, NC,STRNG )
+
+             Write string to any video page
+
+                call  SWRITE ( IROW,ICOL, IPG, IATRB, STRNG )
+
+             Write counted string to any video page
+
+                call  SWRITN ( IROW,ICOL, IPG, IATRB, NC,STRNG )
+
+             Write string to active video page
+
+                call  WRTSTR ( IROW,ICOL, IATRB, STRNG )
+
+             Write counted string to active video page
+
+                call  WRTSTN ( IROW,ICOL, IATRB, NC,STRNG )
+
+             Write (put) a block of characters to active video page
+
+                call PUTBLK ( IRUL,ICUL, IRLR, ICLR, STRBLK )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          37
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        HWRITE    (Write string to 'hidden' video page)
+
+             Integer*2   IROW, ICOL, IATRB
+             Character   STRING*n
+
+             call HWRITE ( IROW,ICOL, IATRB, STRING )
+
+                where ---
+                   IROW   = Row position to write string
+                   ICOL   = Column position to write string
+                      NOTE - Row/Column range is based on the video mode
+                        Modes 0 & 1
+                            Screen upper left (0,0), lower right (24,39)
+                        Modes 2 & 3
+                            Screen upper left (0,0), lower right (24,79)
+                      If string exceeds right of screen, it is truncated
+                   IATRB  = Attribute for string
+                      NOTE - The attribute is a composite value that
+                         specifies the text color, background color and
+                         if the text is blinking or steady. Combine these
+                         components in the following way:
+                           1) Select the text color value
+                               0 Black       8 Gray
+                               1 Blue        9 High-intensity Blue
+                               2 Green      10 High-intensity Green
+                               3 Cyan       11 High-intensity Cyan
+                               4 Red        12 High-intensity Red
+                               5 Magenta    13 High-intensity Magenta
+                               6 Brown      14 High-intensity Brown
+                               7 White      15 High-intensity White
+                           2) Add the appropriate background color value
+                               0 Black      64 Red
+                              16 Blue       80 Magenta
+                              32 Green      96 Brown
+                              48 Cyan      112 White
+                           3) For blinking text, add 128
+                         Example: HI White text, Red background, blinking
+                                   IATRB = 15+64+128 = 207
+                   STRING = String to display ending with a backslash '\'
+
+               NOTE - If active video page is 0, 'hidden' page is 1
+                      If active video page is 1, 'hidden' page is 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          38
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        HWRITN    (Write counted string to 'hidden' video page)
+
+             Integer*2   IROW, ICOL, IATRB, NCHR
+             Character   STRING*n
+
+             call HWRITN ( IROW,ICOL, IATRB, NCHR, STRING )
+
+                where ---
+                   IROW   = Row position to write string
+                   ICOL   = Column position to write string
+                      NOTE - Row/Column range is based on the video mode
+                        Modes 0 & 1
+                            Screen upper left (0,0), lower right (24,39)
+                        Modes 2 & 3
+                            Screen upper left (0,0), lower right (24,79)
+                      If string exceeds right of screen, it is truncated
+                   IATRB  = Attribute for string (see HWRITE for details)
+                   NCHR   = Number of characters in STRING
+                   STRING = String to display (may include '\')
+
+               NOTE - If active video page is 0, 'hidden' page is 1
+                      If active video page is 1, 'hidden' page is 0
+
+
+
+        SWRITE    (Write string to any video page)
+
+             Integer*2   IROW, ICOL, IATRB, IPAGE
+             Character   STRING*n
+
+             call SWRITE ( IROW,ICOL, IPAGE, IATRB, STRING )
+
+                where ---
+                   IROW   = Row position to write string
+                   ICOL   = Column position to write string
+                      NOTE - Row/Column range is based on the video mode
+                        Modes 0 & 1
+                            Screen upper left (0,0), lower right (24,39)
+                        Modes 2 & 3
+                            Screen upper left (0,0), lower right (24,79)
+                      If string exceeds right of screen, it is truncated
+                   IPAGE  = Video page for write
+                      NOTE - Video modes 0 & 1 have 8 video pages, 0 to 7
+                             Video modes 2 & 3 have 4 video pages, 0 to 3
+                   IATRB  = Attribute for string (see HWRITE for details)
+                   STRING = String to display ending with a backslash '\'
+
+
+
+
+
+
+
+
+
+                                          39
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        SWRITN    (Write counted string to any video page)
+
+             Integer*2   IROW, ICOL, IATRB, IPAGE, NCHR
+             Character   STRING*n
+
+             call SWRITN ( IROW,ICOL, IPAGE, IATRB, NCHR, STRING )
+
+                where ---
+                   IROW   = Row position to write string
+                   ICOL   = Column position to write string
+                      NOTE - Row/Column range is based on the video mode
+                        Modes 0 & 1
+                            Screen upper left (0,0), lower right (24,39)
+                        Modes 2 & 3
+                            Screen upper left (0,0), lower right (24,79)
+                      If string exceeds right of screen, it is truncated
+                   IPAGE  = Video page for write
+                      NOTE - Video modes 0 & 1 have 8 video pages, 0 to 7
+                             Video modes 2 & 3 have 4 video pages, 0 to 3
+                   IATRB  = Attribute for string (see HWRITE for details)
+                   NCHR   = Number of characters in STRING
+                   STRING = String to display (may include '\')
+
+
+
+        WRTSTR    (Write string to active video page)
+
+             Integer*2   IROW, ICOL, IATRB
+             Character   STRING*n
+
+             call WRTSTR ( IROW,ICOL, IATRB, STRING )
+
+                where ---
+                   IROW   = Row position to write string
+                   ICOL   = Column position to write string
+                      NOTE - Row/Column range is based on the video mode
+                        Modes 0 & 1
+                            Screen upper left (0,0), lower right (24,39)
+                        Modes 2 & 3
+                            Screen upper left (0,0), lower right (24,79)
+                      If string exceeds right of screen, it is truncated
+                   IATRB  = Attribute for string (see HWRITE for details)
+                   STRING = String to display ending with a backslash '\'
+
+
+
+
+
+
+
+
+
+
+
+
+                                          40
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        WRTSTN    (Write counted string to active video page)
+
+             Integer*2   IROW, ICOL, IATRB, NCHR
+             Character   STRING*n
+
+             call WRTSTN ( IROW,ICOL, IATRB, NCHR, STRING )
+
+                where ---
+                   IROW   = Row position to write string
+                   ICOL   = Column position to write string
+                      NOTE - Row/Column range is based on the video mode
+                        Modes 0 & 1
+                            Screen upper left (0,0), lower right (24,39)
+                        Modes 2 & 3
+                            Screen upper left (0,0), lower right (24,79)
+                      If string exceeds right of screen, it is truncated
+                   IATRB  = Attribute for string (see HWRITE for details)
+                   NCHR   = Number of characters in STRING
+                   STRING = String to display (may include '\')
+
+
+
+        PUTBLK    (Write a block of characters to active video page)
+
+             Character*n STRBLK
+             Integer*2   IRUL, ICUL, IRLR, ICLR
+
+             call PUTBLK ( IRUL,ICUL, IRLR, ICLR, STRBLK )
+
+                where ---
+                   IRUL   = Row of upper left corner of the window
+                   ICUL   = Column of upper left corner of the window
+                   IRLR   = Row of lower right corner of the window
+                   ICLR   = Column of lower right corner of the window
+                      NOTE - Row/Column range is based on the video mode
+                        Modes 0 & 1
+                            Screen upper left (0,0), lower right (24,39)
+                        Modes 2 & 3
+                            Screen upper left (0,0), lower right (24,79)
+                   STRBLK = String of characters with attributes to fill
+                            the block (char,atrib,char,atrib,etc).
+                       NOTE: The attributes must be single byte values
+                            (See HWRITE for attribute details)
+                            The block is filled row by row.
+
+
+
+
+
+
+
+
+
+
+
+                                          41
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        Screen Read Utilities        _____________________
+
+
+             Read a character or block of characters from the active
+        video page.
+
+
+        Summary
+
+             Read a block of characters from active video page
+
+                call GETBLK ( IRUL,ICUL, IRLR, ICLR, STRBLK )
+
+             Read a single character from active video page
+
+                call GETCHR ( IROW,ICOL, IATRIB, CHAR )
+
+
+        GETBLK    (Read a block of characters from active video page)
+
+             Character*n STRBLK
+             Integer*2   IRUL, ICUL, IRLR, ICLR
+
+             call GETBLK ( IRUL,ICUL, IRLR, ICLR, STRBLK )
+
+                where ---
+                   IRUL   = Row of upper left corner of the window
+                   ICUL   = Column of upper left corner of the window
+                   IRLR   = Row of lower right corner of the window
+                   ICLR   = Column of lower right corner of the window
+                      NOTE - Row/Column range is based on the video mode
+                        Modes 0 & 1
+                            Screen upper left (0,0), lower right (24,39)
+                        Modes 2 & 3
+                            Screen upper left (0,0), lower right (24,79)
+                   STRBLK = Returned string of characters with attributes
+                            from the block (char,atrib,char,atrib,etc).
+                       NOTE: The attributes are single byte values
+                            (See HWRITE for attribute details)
+                            The block is read row by row.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          42
+
+
+
+        Michael Gerhard            ELMOP.LIB               March 15, 1993
+
+
+        GETCHR    (Read a single character from active video page)
+
+             Character   CHAR
+             Integer*2   IROW, ICOL, IATRIB
+
+             call GETCHR ( IROW,ICOL, IATRIB, CHAR )
+
+                where ---
+                   IROW   = Row where to read character
+                   ICOL   = Column where to read character
+                      NOTE - Row/Column range is based on the video mode
+                        Modes 0 & 1
+                            Screen upper left (0,0), lower right (24,39)
+                        Modes 2 & 3
+                            Screen upper left (0,0), lower right (24,79)
+                   IATRIB = Returned attribute (See HWRITE for details)
+                   CHAR   = Returned character
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                          43
+

@@ -1,6 +1,4 @@
 C Calculate Pi
-C Used the ELMOP library for DOS calls to get the time
-C
       integer iter
       logical ev
       double precision pi, c1, c2
